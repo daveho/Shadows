@@ -9,6 +9,7 @@
 #define	AREA_H
 
 #include "terrain.h"
+#include "geom.h"
 
 struct AreaData {
     int width, height;
@@ -26,8 +27,17 @@ public:
     Area(int w, int h);
     virtual ~Area();
     
+    int get_width() const { return m_width; }
+    int get_height() const { return m_height; }
+    
     Terrain get_terrain(int x, int y) const;
     void set_terrain(int x, int y, Terrain t);
+    Terrain get_terrain(const Pos &pos) const { return get_terrain(pos.x, pos.y); }
+    void set_terrain(const Pos &pos, Terrain t) { set_terrain(pos.x, pos.y, t); }
+    
+    bool in_bounds(const Pos &pos) const {
+        return pos.x >= 0 && pos.y >= 0 && pos.x < m_width && pos.y < m_height;
+    }
     
     static Area *from_data(const AreaData *ad);
 };

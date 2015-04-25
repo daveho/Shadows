@@ -36,7 +36,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/area.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/game.o \
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/player.o
 
 
 # C Compiler Flags
@@ -53,7 +55,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-lncurses
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -68,10 +70,20 @@ ${OBJECTDIR}/area.o: area.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/area.o area.cpp
 
+${OBJECTDIR}/game.o: game.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/game.o game.cpp
+
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/player.o: player.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/player.o player.cpp
 
 # Subprojects
 .build-subprojects:

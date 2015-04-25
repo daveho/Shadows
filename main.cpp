@@ -1,13 +1,8 @@
-/* 
- * File:   main.cpp
- * Author: dhovemey
- *
- * Created on April 25, 2015, 4:18 PM
- */
-
-#include <cstdio>
+#include <ncurses.h>
 
 #include "area.h"
+#include "player.h"
+#include "game.h"
 
 namespace {
     AreaData demo_area = {
@@ -35,13 +30,83 @@ namespace {
     };
 }
 
-/*
- * 
- */
+int to_glyph(Terrain t) {
+    switch (t) {
+        case ROCK:
+            return '#';
+        case VWALL:
+            return '|';
+        case HWALL:
+            return '-';
+        case ULWALL:
+        case URWALL:
+        case LLWALL:
+        case LRWALL:
+            return '+';
+        case VWALL_SECRET:
+            return '|';
+        case HWALL_SECRET:
+            return '-';
+        case PILLAR:
+            return 'o';
+        case FLOOR:
+            return '.';
+        case UNKNOWN:
+        default: return '?';
+    }
+}
+
+void show(Game *g) {
+    erase();
+    Area *a = g->get_area();
+    Player *p = g->get_player();
+    for (int j = 0; j < a->get_height(); j++) {
+        for (int i = 0; i < a->get_width(); i++) {
+            move(j, i);
+            printw("%c", to_glyph(a->get_terrain(i, j)));
+        }
+    }
+    Pos ppos = p->get_pos();
+    move(ppos.y, ppos.x);
+    printw("@");
+    refresh();
+}
+
 int main(int argc, char** argv) {
     printf("Hello, world\n");
     
-    Area *a = Area::from_data(&demo_area);
+    Game *g = new Game(Area::from_data(&demo_area), new Player());
+    Area *a = g->get_area();
+    Player *p = g->get_player();
+    p->set_pos(Pos(18, 5));
+    
+    initscr();
+    cbreak();
+    keypad(stdscr, TRUE);
+    
+    bool done = false;
+    while (!done) {
+        int c = getch();
+        Pos next = p->get_pos();
+        switch (c) {
+            case KEY_UP:
+                next = next.move(UP); break;
+            case KEY_RIGHT:
+                next = next.move(RIGHT); break;
+            case KEY_DOWN:
+                next = next.move(DOWN); break;
+            case KEY_LEFT:
+                next = next.move(LEFT); break;
+            case 'q':
+                done = true; break;
+        }
+        if (a->in_bounds(next) && !is_solid(a->get_terrain(next))) {
+            p->set_pos(next);
+        }
+        show(g);
+    }
+    
+    endwin();
 
     return 0;
 }
