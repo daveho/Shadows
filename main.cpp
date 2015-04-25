@@ -69,6 +69,7 @@ void show(Game *g) {
     Pos ppos = p->get_pos();
     move(ppos.y, ppos.x);
     printw("@");
+    move(a->get_height(), 0);
     refresh();
 }
 
@@ -78,7 +79,7 @@ int main(int argc, char** argv) {
     Game *g = new Game(Area::from_data(&demo_area), new Player());
     Area *a = g->get_area();
     Player *p = g->get_player();
-    p->set_pos(Pos(18, 5));
+    p->set_pos(Pos(5, 18));
     
     initscr();
     cbreak();
@@ -86,6 +87,7 @@ int main(int argc, char** argv) {
     
     bool done = false;
     while (!done) {
+        show(g);
         int c = getch();
         Pos next = p->get_pos();
         switch (c) {
@@ -103,7 +105,6 @@ int main(int argc, char** argv) {
         if (a->in_bounds(next) && !is_solid(a->get_terrain(next))) {
             p->set_pos(next);
         }
-        show(g);
     }
     
     endwin();
