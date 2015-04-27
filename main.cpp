@@ -64,7 +64,17 @@ struct FOV {
     Game *game;
     fov_settings_type *fs;
     Grid<bool> *vis;
-    FOV(Game *g) : game(g), vis(new Grid<bool>(g->get_area()->get_width(), g->get_area()->get_height())) { }
+    
+    FOV(Game *g)
+        : game(g)
+        , fs(new fov_settings_type)
+        , vis(new Grid<bool>(g->get_area()->get_width(), g->get_area()->get_height()))
+    { }
+    
+    ~FOV() {
+        delete fs;
+        delete vis;
+    }
 };
 
 bool test_opacity(void *map, int x, int y) {
@@ -84,12 +94,12 @@ void apply_lighting(void *map, int x, int y, int dx, int dy, void *src) {
     fov->vis->set(Pos(x, y), true);
 }
 
-void show(FOV *f, fov_settings_type *fs) {
+void show(FOV *f) {
     Game *g = f->game;
     
     f->vis->fill(false); // clear visibility
     Pos ppos = g->get_player()->get_pos();
-    fov_circle(fs, f, 0, ppos.x, ppos.y, 10); // compute visibility
+    fov_circle(f->fs, f, 0, ppos.x, ppos.y, 10); // compute visibility
     
     erase();
     Area *a = g->get_area();
@@ -117,10 +127,9 @@ int main(int argc, char** argv) {
     
     FOV *fov = new FOV(g);
     
-    fov_settings_type fs;
-    fov_settings_init(&fs);
-    fov_settings_set_opacity_test_function(&fs, &test_opacity);
-    fov_settings_set_apply_lighting_function(&fs, &apply_lighting);
+    fov_settings_init(fov->fs);
+    fov_settings_set_opacity_test_function(fov->fs, &test_opacity);
+    fov_settings_set_apply_lighting_function(fov->fs, &apply_lighting);
     
     initscr();
     cbreak();
@@ -128,7 +137,7 @@ int main(int argc, char** argv) {
     
     bool done = false;
     while (!done) {
-        show(fov, &fs);
+        show(fov);
         int c = getch();
         Pos next = p->get_pos();
         switch (c) {
