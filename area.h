@@ -9,7 +9,7 @@
 #define	AREA_H
 
 #include "terrain.h"
-#include "geom.h"
+#include "grid.h"
 
 struct AreaData {
     int width, height;
@@ -18,25 +18,20 @@ struct AreaData {
 
 class Area {
 private:
-    int m_width, m_height;
-    Terrain *m_terrain;
-    
-    inline int index(int x, int y) const { return y*m_width + x; }
+    Grid<Terrain> *m_grid;
     
 public:
     Area(int w, int h);
     virtual ~Area();
     
-    int get_width() const { return m_width; }
-    int get_height() const { return m_height; }
+    int get_width() const { return m_grid->get_width(); }
+    int get_height() const { return m_grid->get_height(); }
     
-    Terrain get_terrain(int x, int y) const;
-    void set_terrain(int x, int y, Terrain t);
-    Terrain get_terrain(const Pos &pos) const { return get_terrain(pos.x, pos.y); }
-    void set_terrain(const Pos &pos, Terrain t) { set_terrain(pos.x, pos.y, t); }
+    Terrain get_terrain(const Pos &pos) const { return m_grid->get(pos); }
+    void set_terrain(const Pos &pos, Terrain t) { m_grid->set(pos, t); }
     
     bool in_bounds(const Pos &pos) const {
-        return pos.x >= 0 && pos.y >= 0 && pos.x < m_width && pos.y < m_height;
+        return m_grid->in_bounds(pos);
     }
     
     static Area *from_data(const AreaData *ad);

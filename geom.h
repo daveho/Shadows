@@ -49,5 +49,21 @@ struct Pos {
     }
 };
 
+#if 0
+struct Rect {
+    Pos topleft;
+    int width, height;
+    Rect(const Pos &topleft_, int width_, int height_)
+        : topleft(topleft_), width(width_), height(height_) { }
+    
+    bool contains(const Pos &pos) const {
+        return pos.x >= topleft.x
+                && pos.x < topleft.x + width
+                && pos.y >= topleft.y
+                && pos.y < topleft.y + height;
+    }
+};
+#endif
+
 #endif	/* GEOM_H */
 

@@ -5,8 +5,10 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>area.h</itemPath>
+      <itemPath>fov.h</itemPath>
       <itemPath>game.h</itemPath>
       <itemPath>geom.h</itemPath>
+      <itemPath>grid.h</itemPath>
       <itemPath>player.h</itemPath>
       <itemPath>terrain.h</itemPath>
     </logicalFolder>
@@ -18,6 +20,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>area.cpp</itemPath>
+      <itemPath>fov.cpp</itemPath>
       <itemPath>game.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>player.cpp</itemPath>
@@ -43,6 +46,9 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <warningLevel>2</warningLevel>
+        </ccTool>
         <linkerTool>
           <linkerLibItems>
             <linkerOptionItem>-lncurses</linkerOptionItem>
@@ -53,11 +59,17 @@
       </item>
       <item path="area.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="fov.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="fov.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="game.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="game.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="geom.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="grid.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -92,11 +104,17 @@
       </item>
       <item path="area.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="fov.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="fov.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="game.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="game.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="geom.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="grid.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

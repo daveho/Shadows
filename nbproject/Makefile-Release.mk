@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/area.o \
+	${OBJECTDIR}/fov.o \
 	${OBJECTDIR}/game.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/player.o
@@ -69,6 +70,11 @@ ${OBJECTDIR}/area.o: area.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/area.o area.cpp
+
+${OBJECTDIR}/fov.o: fov.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/fov.o fov.cpp
 
 ${OBJECTDIR}/game.o: game.cpp 
 	${MKDIR} -p ${OBJECTDIR}
