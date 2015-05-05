@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>area.h</itemPath>
+      <itemPath>character.h</itemPath>
       <itemPath>fov.h</itemPath>
       <itemPath>game.h</itemPath>
       <itemPath>geom.h</itemPath>
@@ -20,6 +21,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>area.cpp</itemPath>
+      <itemPath>character.cpp</itemPath>
       <itemPath>fov.cpp</itemPath>
       <itemPath>game.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -58,6 +60,10 @@
       <item path="area.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="area.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="character.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="character.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="fov.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -103,6 +109,10 @@
       <item path="area.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="area.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="character.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="character.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="fov.cpp" ex="false" tool="1" flavor2="0">
       </item>
