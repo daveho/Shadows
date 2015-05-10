@@ -168,7 +168,10 @@ int main(int argc, char** argv) {
     endwin();
 #endif
     
-    Area *area = new Area(60, 20);
+    const int MAP_WIDTH = 160;
+    const int MAP_HEIGHT = 40;
+    
+    Area *area = new Area(MAP_WIDTH, MAP_HEIGHT);
     AreaEditor *area_editor = new AreaEditor(area);
     RNG rng;
     DungeonGenParams params;
