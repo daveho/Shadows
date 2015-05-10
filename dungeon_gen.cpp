@@ -1,3 +1,11 @@
+#define DEBUG
+
+#ifdef DEBUG
+#  include <cstdio>
+#  define debug_printf(args...) printf(args)
+#else
+#  define debug_printf(args...)
+#endif
 #include "rng.h"
 #include "area_editor.h"
 #include "dungeon_gen.h"
@@ -38,9 +46,14 @@ void DungeonGen::gen_corridors() {
     
     // Generate rectangular main corridor system
     Range top(m_params.room_inset + m_params.room_height.min/2, vmid - m_params.room_height.min/2);
-    Range bottom(m_area->get_height() - top.max - 1, m_area->get_height() - top.min - 1);
+    Range bottom(m_area->get_height() - top.max, m_area->get_height() - top.min);
     Range left(m_params.room_inset + m_params.room_width.min/2, hmid - m_params.room_width.min/2);
-    Range right(m_area->get_width() - left.max - 1, m_area->get_width() - left.min - 1);
+    Range right(m_area->get_width() - left.max, m_area->get_width() - left.min);
+    
+    debug_printf("top: %i..%i\n", top.min, top.max);
+    debug_printf("bottom: %i..%i\n", bottom.min, bottom.max);
+    debug_printf("left: %i..%i\n", left.min, left.max);
+    debug_printf("right: %i..%i\n", right.min, right.max);
     
     int ctop = top.rand(m_rng);
     int cbottom = bottom.rand(m_rng);

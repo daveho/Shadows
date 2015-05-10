@@ -172,6 +172,7 @@ int main(int argc, char** argv) {
     AreaEditor *area_editor = new AreaEditor(area);
     RNG rng;
     DungeonGenParams params;
+    params.room_inset = 2;
     DungeonGen *dgen = new DungeonGen(rng, params);
     dgen->generate(area_editor);
     
