@@ -36,11 +36,15 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/area.o \
+	${OBJECTDIR}/area_editor.o \
 	${OBJECTDIR}/character.o \
+	${OBJECTDIR}/dungeon_gen.o \
 	${OBJECTDIR}/fov.o \
 	${OBJECTDIR}/game.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/player.o
+	${OBJECTDIR}/player.o \
+	${OBJECTDIR}/range.o \
+	${OBJECTDIR}/rng.o
 
 
 # C Compiler Flags
@@ -72,10 +76,20 @@ ${OBJECTDIR}/area.o: area.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/area.o area.cpp
 
+${OBJECTDIR}/area_editor.o: area_editor.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/area_editor.o area_editor.cpp
+
 ${OBJECTDIR}/character.o: character.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/character.o character.cpp
+
+${OBJECTDIR}/dungeon_gen.o: dungeon_gen.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/dungeon_gen.o dungeon_gen.cpp
 
 ${OBJECTDIR}/fov.o: fov.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -96,6 +110,16 @@ ${OBJECTDIR}/player.o: player.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/player.o player.cpp
+
+${OBJECTDIR}/range.o: range.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/range.o range.cpp
+
+${OBJECTDIR}/rng.o: rng.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/rng.o rng.cpp
 
 # Subprojects
 .build-subprojects:
