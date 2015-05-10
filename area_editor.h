@@ -24,9 +24,10 @@ public:
     int get_width();
     int get_height();
     
-    void fill(Terrain t);
-    void hline(int y, const Range &xrange, Terrain t);
-    void vline(int x, const Range &yrange, Terrain t);
+    // Set terrain
+    void t_fill(Terrain t);
+    void t_hline(int y, const Range &xrange, Terrain t);
+    void t_vline(int x, const Range &yrange, Terrain t);
 };
 
 #endif	/* AREAEDITOR_H */

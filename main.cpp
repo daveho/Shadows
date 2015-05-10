@@ -1,11 +1,17 @@
 #include <ncurses.h>
 
 #include "area.h"
+#if 0
 #include "player.h"
 #include "game.h"
 #include "fov.h"
 #include "grid.h"
+#endif
+#include "rng.h"
+#include "area_editor.h"
+#include "dungeon_gen.h"
 
+#if 0
 namespace {
     AreaData demo_area = {
         40, 20,
@@ -31,6 +37,7 @@ namespace {
         "##a------s######a------s###q---------w##"
     };
 }
+#endif
 
 int to_glyph(Terrain t) {
     switch (t) {
@@ -58,6 +65,7 @@ int to_glyph(Terrain t) {
     }
 }
 
+#if 0
 // FOV callbacks
 
 struct FOV {
@@ -116,10 +124,10 @@ void show(FOV *f) {
     move(a->get_height(), 0);
     refresh();
 }
+#endif
 
 int main(int argc, char** argv) {
-    printf("Hello, world\n");
-    
+#if 0
     Game *g = new Game(Area::from_data(&demo_area), new Player());
     Area *a = g->get_area();
     Player *p = g->get_player();
@@ -158,6 +166,22 @@ int main(int argc, char** argv) {
     }
     
     endwin();
+#endif
+    
+    Area *area = new Area(60, 20);
+    AreaEditor *area_editor = new AreaEditor(area);
+    RNG rng;
+    DungeonGenParams params;
+    DungeonGen *dgen = new DungeonGen(rng, params);
+    dgen->generate(area_editor);
+    
+    for (int j = 0; j < area->get_height(); j++) {
+        for (int i = 0; i < area->get_width(); i++) {
+            Terrain t = area->get_terrain(Pos(i, j));
+            printf("%c", to_glyph(t));
+        }
+        printf("\n");
+    }
 
     return 0;
 }

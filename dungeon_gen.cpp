@@ -28,7 +28,7 @@ void DungeonGen::generate(AreaEditor *area) {
 }
 
 void DungeonGen::do_generate() {
-    m_area->fill(ROCK);
+    m_area->t_fill(ROCK);
     gen_corridors();
     gen_rooms();
 }
@@ -47,10 +47,10 @@ void DungeonGen::gen_corridors() {
     int cleft = left.rand(m_rng);
     int cright = right.rand(m_rng);
     
-    m_area->hline(ctop, Range(cleft, cright+1), FLOOR);
-    m_area->hline(cbottom, Range(cleft, cright+1), FLOOR);
-    m_area->vline(cleft, Range(ctop, cbottom+1), FLOOR);
-    m_area->vline(cright, Range(ctop, cbottom+1), FLOOR);
+    m_area->t_hline(ctop, Range(cleft, cright+1), FLOOR);
+    m_area->t_hline(cbottom, Range(cleft, cright+1), FLOOR);
+    m_area->t_vline(cleft, Range(ctop, cbottom+1), FLOOR);
+    m_area->t_vline(cright, Range(ctop, cbottom+1), FLOOR);
 }
 
 void DungeonGen::gen_rooms() {
