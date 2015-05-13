@@ -64,8 +64,23 @@ void DungeonGen::gen_corridors() {
     m_area->t_hline(cbottom, Range(cleft, cright+1), FLOOR);
     m_area->t_vline(cleft, Range(ctop, cbottom+1), FLOOR);
     m_area->t_vline(cright, Range(ctop, cbottom+1), FLOOR);
+    
+    // Room locations are seeded from the set of cooridor tiles
+    m_room_seeds = m_area->find_all(FLOOR);
 }
 
 void DungeonGen::gen_rooms() {
+    int max_attempts = 100;
+    int max_rooms = 20;
+    
+    int num_attempts = 0;
+    while (num_attempts < max_attempts) {
+        Pos seed = m_room_seeds.at(m_rng.next(int(m_room_seeds.size())));
+        attempt_place_room(seed);
+        num_attempts++;
+    }
+}
+
+void DungeonGen::attempt_place_room(const Pos &seed) {
     // TODO
 }

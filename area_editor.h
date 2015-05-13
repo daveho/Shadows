@@ -8,6 +8,8 @@
 #ifndef AREAEDITOR_H
 #define	AREAEDITOR_H
 
+#include <vector>
+#include "geom.h"
 #include "range.h"
 #include "terrain.h"
 
@@ -28,6 +30,8 @@ public:
     void t_fill(Terrain t);
     void t_hline(int y, const Range &xrange, Terrain t);
     void t_vline(int x, const Range &yrange, Terrain t);
+
+    std::vector<Pos> find_all(Terrain t) const;
 };
 
 #endif	/* AREAEDITOR_H */

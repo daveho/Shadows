@@ -8,6 +8,7 @@
 #ifndef DUNGEON_GEN_H
 #define	DUNGEON_GEN_H
 
+#include <set>
 #include "range.h"
 
 class RNG;
@@ -25,6 +26,7 @@ private:
     RNG &m_rng;
     const DungeonGenParams &m_params;
     AreaEditor *m_area;
+    std::vector<Pos> m_room_seeds;
     
 public:
     DungeonGen(RNG &rng, const DungeonGenParams &params);
@@ -36,6 +38,7 @@ private:
     void do_generate();
     void gen_corridors();
     void gen_rooms();
+    void attempt_place_room(const Pos &seed);
 };
 
 #endif	/* DUNGEON_GEN_H */

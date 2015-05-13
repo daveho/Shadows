@@ -47,6 +47,16 @@ struct Pos {
                 return *this;
         }
     }
+    
+    bool operator<(const Pos &rhs) const {
+        if (x < rhs.x) {
+            return true;
+        } else if (x > rhs.x) {
+            return false;
+        } else {
+            return y < rhs.y;
+        }
+    }
 };
 
 #if 0

@@ -34,3 +34,18 @@ void AreaEditor::t_vline(int x, const Range &yrange, Terrain t) {
         m_area->set_terrain(Pos(x, j), t);
     }
 }
+
+std::vector<Pos> AreaEditor::find_all(Terrain t) const {
+    std::vector<Pos> result;
+    
+    for (int j = 0; j < m_area->get_height(); j++) {
+        for (int i = 0; i < m_area->get_width(); i++) {
+            Pos pos(i, j);
+            if (m_area->get_terrain(pos) == t) {
+                result.push_back(pos);
+            }
+        }
+    }
+    
+    return result;
+}
